@@ -85,8 +85,8 @@ And then wrap your asynchronous callback with the `_x` function:
 
 ```js
 	var fs = require('fs');
-	var laeh = require('../lib/laeh2').leanStacks(true, '\t');
-	var _e = laeh._e;
+	var laeh = require('laeh2').leanStacks(true);
+	var _e = laeh._e; // optional
 	var _x = laeh._x;
 
 	var myfunc = function(param1, paramN, cb) {
