@@ -62,6 +62,7 @@ function someContext(arg, arg, callback) {
 ```
 
 Parameter explanation:
+
 * callback: in case of error return control to callback
 * true: automatically check the err parameter for trueness
 * function: the asynchronously run function to wrap
