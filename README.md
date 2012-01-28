@@ -164,7 +164,7 @@ app.param('reg', function(req, res, next, email) {
 
 Now any error thrown in the callback called by Redis' `hgetall` will be captured and passed to the `next()` function. Likewise, should Redis respond with an error passed via the `err` parameter, this parameter is automatically checked and the error will be passed to the `next()` function. Easy peasy LAEH squeezy.
 
-Note: There is no need to `_x`-wrap the callback passed to the `app.param()` call (or `app.get()` etc.), as Express.js handles wraps and handles this first level automatically.
+Note: There is no need to `_x`-wrap the callback passed to the `app.param()` call (or `app.get()` etc.), as Express.js wraps and handles this first level automatically.
 
 ### Other
 
