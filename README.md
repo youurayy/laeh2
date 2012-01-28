@@ -164,6 +164,8 @@ app.param('reg', function(req, res, next, email) {
 
 Now any error thrown in the callback called by Redis' `hgetall` will be captured and passed to the `next()` function. Likewise, should Redis respond with an error passed via the `err` parameter, this parameter is automatically checked and the error will be passed to the `next()` function. Easy peasy LAEH squeezy.
 
+Note: There is no need to `_x`-wrap the callback passed to the `app.param()` call (or `app.get() etc.`), as Express.js handles wraps and handles this first level automatically.
+
 ### Other
 
 The `_e(err, meta)` function is just a convenient error checking, wrapping and throwing. E.g. `_e('something')` will throw `new Error('something')` and `_e(null)` will not do anything. The `meta` parameter is an optional accompanying information for the error to be thrown, which is then displayed when you let LAEH to display your errors using the `leanStacks()` call.
