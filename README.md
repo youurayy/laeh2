@@ -63,9 +63,9 @@ function someContext(arg, arg, callback) {
 
 Parameter explanation:
 
-* callback: in case of error return control to callback
-* true: automatically check callback's err parameter and pass it directly to the parent callback if true
-* function: the asynchronously executed callback function to wrap
+* `callback`: in case of error return control to callback
+* `true`: automatically check callback's err parameter and pass it directly to the parent callback if true
+* `function`: the asynchronously executed callback function to wrap
 
 
 ### 4. Optional Goodies
