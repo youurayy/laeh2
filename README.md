@@ -108,7 +108,7 @@ This will print:
 	
 The async boundary is (by default) marked with `<<`.
 
-If we disable `hiding` by passing `false` as the first parameter, the output will be something like:
+If we disable the "hiding" by passing `false` as the first parameter, the output will be something like:
 
 	unexpected thing < /Users/ypocat/Github/laeh2/lib/laeh2.js(31) < ./ex1.js(9) < /Users/ypocat/Github/laeh2/lib/laeh2.js(56) << /Users/ypocat/Github/laeh2/lib/laeh2.js(45) < ./ex1.js(7 < 13) < module.js(432 < 450 < 351 < 310 < 470) < node.js(192)
 
