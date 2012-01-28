@@ -84,22 +84,22 @@ Install LAEH2:
 And then wrap your asynchronous callback with the `_x` function:
 
 ```js
-	var fs = require('fs');
-	var laeh = require('laeh2').leanStacks(true);
-	var _e = laeh._e; // optional
-	var _x = laeh._x;
+var fs = require('fs');
+var laeh = require('laeh2').leanStacks(true);
+var _e = laeh._e; // optional
+var _x = laeh._x;
 
-	var myfunc = function(param1, paramN, cb) {
-		fs.readdir(__dirname, _x(cb, true, function(err, files) { // LINE #7
-			// do your things here..
-			_e('unexpected thing'); // throw your own errors, etc. LINE #9
-		}));
-	}
+var myfunc = function(param1, paramN, cb) {
+	fs.readdir(__dirname, _x(cb, true, function(err, files) { // LINE #7
+		// do your things here..
+		_e('unexpected thing'); // throw your own errors, etc. LINE #9
+	}));
+}
 
-	myfunc('dummy', 'dummy', function(err) { // LINE #13
-		if(err)
-			console.log(err.stack);
-	});
+myfunc('dummy', 'dummy', function(err) { // LINE #13
+	if(err)
+		console.log(err.stack);
+});
 ```
 
 This will print:
@@ -115,7 +115,7 @@ If we disable `hiding` by passing `false` as the first parameter, the output wil
 If we enable hiding, and add some metadata:
 
 ```js
-	_e('unexpected thing', { msg: 'my metadata', xyz: 123 });
+_e('unexpected thing', { msg: 'my metadata', xyz: 123 });
 ```
 
 ..the output, when configured with `.leanStacks(true, '\t')`, will be:
