@@ -77,8 +77,11 @@ LAEH2 then presents the stacktrace in a minified format, with optional hiding of
 
 ## Usage
 
+Install LAEH2:
+
 	npm install laeh2
 
+And then wrap your asynchronous callback with the `_x` function:
 
 ```js
 	var fs = require('fs');
