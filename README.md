@@ -147,6 +147,24 @@ Added in LAEH2 are 2 new parameters to `.leanStacks`: `frameSeparator` and `fibe
 	<<
 	./ex6.js(7 < 13)
 
+## Express.js
+
+When coding handlers or params for Express.js or Connect, just pass the `next` parameter as the eventual callback, e.g.:
+
+```js
+app.param('reg', function(req, res, next, email) {
+	db.hgetall('reg:' + email, _x(next, true, function(err, reg) {
+		if(!reg.lickey)
+			return next('No such registration');
+		req.reg = reg;
+		next();
+	}));
+});
+```
+
+Now any error thrown in the callback called by Redis' `hgetall` will be captured and passed to the `next()` function. Likewise, should Redis respond with an error passed via the `err` parameter, this parameter is automatically checked and the error will be passed to the `next()` function. Easy peasy LAEH squeezy.
+
+## Other
 
 The `_e(err, meta)` function is just a convenient error checking, wrapping and throwing. E.g. `_e('something')` will throw `new Error('something')` and `_e(null)` will not do anything. The `meta` parameter is an optional accompanying information for the error to be thrown, which is then displayed when you let LAEH to display your errors using the `leanStacks()` call.
 
