@@ -64,20 +64,21 @@ function someContext(arg, arg, callback) {
 Parameter explanation:
 
 * callback: in case of error return control to callback
-* true: automatically check the err parameter for trueness
-* function: the asynchronously run function to wrap
+* true: automatically check callback's err parameter and pass it directly to the parent callback if true
+* function: the asynchronously executed callback function to wrap
 
 
 ### 4. Optional Goodies
 
-LAEH2 stores the stacktrace of the thread that initiated the asynchronous operation which in turn called the callback. This stacktrace is then appended to the primary stacktrace of the error which happened in the callback, or the error which was passed to the callback by the asynchronous function.
+LAEH2 stores the stacktrace of the thread that initiated the asynchronous operation which in turn called the callback. This stacktrace is then appended to the primary stacktrace of the error which was thrown in the callback, or the error which was passed to the callback by the asynchronous function.
 
-LAEH2 then presents the stacktrace in a minified format, with optional hiding of frames of the `laeh2.js` itself, of the node.js core library files, shortens the often repeating string `/node_modules/` into `/$/`, and removes the current directory path prefix from the file names in the stacktrace.
+LAEH2 then presents the stacktrace in a minified format, with optional hiding of frames of the `laeh2.js` itself, of the Node.js' core library files, shortens the often repeating string `/node_modules/` into `/$/`, and removes the current directory path prefix from the file names in the stacktrace.
 
 
 ## Usage
 
 	npm install laeh2
+
 
 ```js
 	var fs = require('fs');
