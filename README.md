@@ -4,9 +4,10 @@
 The previous version of LAEH[1] is now deprecated. 
 
 The reason is that is that some functions were removed, namely the support for Express.js and the MongoDB utility. This is because it is possible to nicely support Express.js while maintaining only a single version of the callback wrapper function. The MongoDB support is something that should reside in the `ultiz` package.
-But the main reason is that the arguments of the `_x` function were swapped, which would silently break any laeh-dependent code.
+But the main reason is that the arguments of the `_x` function were swapped, which would silently break any LAEH-dependent code.
 
 Changes from LAEH1:
+
 * Only a single callback wrapper function, the `_x`.
 * The `cb` and `chk` were moved to the front of `_x`'s argument list, to make code more readable.
 * The `_x` function now nicely ties to error handling in Express.js and Connect.
