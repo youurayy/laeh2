@@ -140,7 +140,7 @@ For comparison, this would be printed without using `.leanStacks`:
 
 The `leanStacks(hiding, prettyMeta)` call is optional, the `hiding` will hide stack frames from Node's core .js files and from `laeh2.js` itself. The `prettyMeta` is the third parameter for the `JSON.stringify` function, which is used to serialize your metadata objects (see below), and leaving it empty or null will serialize your metadata objects in-line.
 
-Added in LAEH2 are 2 new parameters to `.leanStacks`: `frameSeparator` and `fiberSeparator`, which default to `' < '` and `' << '`, respectively. But if you use tools which rely on the newlines in your stack traces, you can set these accordingly, e.g. to `'\n'` and `'\n<<\n'`, respectively:
+Added in LAEH2 are 2 new parameters to `.leanStacks`: `frameSeparator` and `fiberSeparator`, which default to `' < '` and `' << '`, respectively. But if you use tools which rely on the newlines in your stack traces, you can set these accordingly, e.g. to `'\n'` and `'\n<<\n'`, respectively, e.g. `.leanStacks(true, null, '\n', '\n<<\n')`:
 
 	unexpected thing
 	./ex6.js(9)
