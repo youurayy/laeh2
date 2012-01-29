@@ -1,7 +1,9 @@
 # Lightweight Asynchronous Error Handling v2 for Node.js (LAEH2)
 
 
-The previous version of LAEH[1] is now deprecated. 
+The previous version of LAEH[1] is now deprecated.
+
+[1]: https://github.com/ypocat/laeh
 
 The reason is that is that some functions were removed, namely the support for Express.js and the MongoDB utility. This is because it is possible to nicely support Express.js while maintaining only a single version of the callback wrapper function. The MongoDB support is something that should reside in the `ultiz` package.
 But the main reason is that the arguments of the `_x` function were swapped, which would silently break any LAEH1-dependent code.
