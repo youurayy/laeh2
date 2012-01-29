@@ -146,6 +146,18 @@ Added in LAEH2 are 2 new parameters to `.leanStacks`: `frameSeparator` and `fibe
 	./ex6.js(9)
 	<<
 	./ex6.js(7 < 13)
+	
+### Warning
+
+Don't use LAEH to wrap non-asynchronous callbacks, and especially non-asynchronous loop callbacks, as this can lead to nasty runtime errors. Consider e.g.:
+
+```js
+[ 'one', 'two', 'three' ].forEach(_x(cb, false, function(v) {
+	throw new Error('unexpected');
+}));
+```
+
+This will call the `cb` callback three times (effectively forking your control flow), because the `Array.forEach()` will not stop looping when the callback is called. Correct approach here is to not wrap the synchronous callback in `_x`, and let the parent block (which should be protected by `_x`, by `try/catch`, or by its synchronous parent block) handle any exceptions.
 
 ### Express.js
 
