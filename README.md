@@ -1,19 +1,19 @@
 # Lightweight Asynchronous Error Handling v2 for Node.js (LAEH2)
 
 
-The previous version of LAEH[1] is now deprecated.
+> The previous version of LAEH[1] is now deprecated.
 
 [1]: https://github.com/ypocat/laeh
 
-The reason is that is that some functions were removed, namely the support for Express.js and the MongoDB utility. This is because it is possible to nicely support Express.js while maintaining only a single version of the callback wrapper function. The MongoDB support is something that should reside in the `ultiz` package.
+> The reason is that is that some functions were removed, namely the support for Express.js and the MongoDB utility. This is because it is possible to nicely support Express.js while maintaining only a single version of the callback wrapper function. The MongoDB support is something that should reside in the `ultiz` package.
 But the main reason is that the arguments of the `_x` function were swapped, which would silently break any LAEH1-dependent code.
 
-Changes since LAEH1:
+> Changes since LAEH1:
 
-* Only a single callback wrapper function, the `_x`.
-* The `cb` and `chk` were moved to the front of `_x`'s argument list, to make code more readable.
-* The `_x` function now nicely ties to error handling in Express.js and Connect.
-* Lean Stacks support was also updated to be even more terse, and formatting options were added to support utilities which parse stack traces based on newlines (e.g. the error template in Express.js).
+> * Only a single callback wrapper function, the `_x`.
+> * The `cb` and `chk` were moved to the front of `_x`'s argument list, to make code more readable.
+> * The `_x` function now nicely ties to error handling in Express.js and Connect.
+> * Lean Stacks support was also updated to be even more terse, and formatting options were added to support utilities which parse stack traces based on newlines (e.g. the error template in Express.js).
 
 
 ## Evolution
@@ -23,7 +23,7 @@ Changes since LAEH1:
 ```js
 function someContext(arg, arg, callback) {
 
-	someAsyncFunction(arg, arg, function(err, data) {
+	asyncFunction(arg, arg, function(err, data) {
 		// err is not checked but should be (a common case)
 		throw new Error('fail'); // uncaught - will exit Node.js
 	}
@@ -36,7 +36,7 @@ function someContext(arg, arg, callback) {
 ```js
 function someContext(arg, arg, callback) {
 
-	someAsyncFunctionWithCallback(arg, arg, function(err, data) {
+	asyncFunction(arg, arg, function(err, data) {
 		if(err)
 			callback(err);
 		else {
@@ -57,13 +57,13 @@ function someContext(arg, arg, callback) {
 ```js
 function someContext(arg, arg, callback) {
 
-	someAsyncFunctionWithCallback(arg, arg, _x(callback, true, function(err, data) {
+	asyncFunction(arg, arg, _x(callback, true, function(err, data) {
 		throw new Error('fail');
 	}));
 }
 ```
 
-Parameter explanation:
+Parameters for the `_x` LAEH2 wrapper function:
 
 * `callback`: in case of error return control to callback
 * `true`: automatically check callback's err parameter and pass it directly to the parent callback if true
@@ -139,6 +139,8 @@ For comparison, this would be printed without using `.leanStacks`:
 	    at /Users/ypocat/Github/laeh2/lib/laeh2.js:31:8
 	    at /Users/ypocat/Github/laeh2/example/ex4.js:9:3
 	    at Object.oncomplete (/Users/ypocat/Github/laeh2/lib/laeh2.js:56:9)
+	
+(Notice that the parent stack trace is missing.)
 
 The `leanStacks(hiding, prettyMeta)` call is optional, the `hiding` will hide stack frames from Node's core .js files and from `laeh2.js` itself. The `prettyMeta` is the third parameter for the `JSON.stringify` function, which is used to serialize your metadata objects (see below), and leaving it empty or null will serialize your metadata objects in-line.
 
@@ -184,4 +186,4 @@ Note: There is no need to `_x`-wrap the callback passed to the `app.param()` cal
 
 The `_e(err, meta)` function is just a convenient error checking, wrapping and throwing. E.g. `_e('something')` will throw `new Error('something')` and `_e(null)` will not do anything. The `meta` parameter is an optional accompanying information for the error to be thrown, which is then displayed when you let LAEH to display your errors using the `leanStacks()` call.
 
-In the `_x(cb, chk, func)`, the func is you callback to be wrapped. If it follows the node convention of `func(err, args)`, you can pass `chk` as true, which will automatically check for the `err` to be null, and call the eventual callback if it isn't null. The eventual callback is passed as the `cb` argument, or if omitted, it is tried to be derived from the last argument passed to the function you are wrapping, e.g. if the signature is `func(err, args, cb)`, the `cb` is taken from its arguments.
+In the `_x(cb, chk, func)`, the func is your callback to be wrapped. If it follows the node convention of `func(err, args)`, you can pass `chk` as true, which will automatically check for the `err` to be null, and call the eventual callback if it isn't null. The eventual callback is passed as the `cb` argument, or if omitted, it is tried to be derived from the last argument passed to the function you are wrapping, e.g. if the signature is `func(err, args, cb)`, the `cb` is taken from its arguments.
