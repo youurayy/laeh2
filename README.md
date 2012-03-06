@@ -150,6 +150,24 @@ Added in LAEH2 are 2 new parameters to `.leanStacks`: `frameSeparator` and `fibe
 	./ex6.js(9)
 	<<
 	./ex6.js(7 < 13)
+
+### Notes
+
+```js
+// on Node 0.6 the following 2 lines are not really necessary, require maps these automatically:
+var _e = laeh._e; // optional
+var _x = laeh._x;
+```
+
+If you don't want a new Error object to be created each time a function wrapped by `_x()` is called (you are OK to lose the stack-trace of the async caller), use the following call:
+
+```js
+var laeh = require('laeh2').capturePrevious(false);
+
+// you can also chain these, e.g.:
+
+var laeh = require('laeh2').capturePrevious(false).leanStacks(true);
+```
 	
 ### Warning
 
