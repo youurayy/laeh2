@@ -1,21 +1,5 @@
 # Lightweight Asynchronous Error Handling v2 for Node.js (LAEH2)
 
-
-> The previous version of LAEH[1] is now deprecated.
-
-[1]: https://github.com/ypocat/laeh
-
-> The reason is that is that some functions were removed, namely the support for Express.js and the MongoDB utility. This is because it is possible to nicely support Express.js while maintaining only a single version of the callback wrapper function. The MongoDB support is something that should reside in the `ultiz` package.
-But the main reason is that the arguments of the `_x` function were swapped, which would silently break any LAEH1-dependent code.
-
-> Changes since LAEH1:
-
-> * Only a single callback wrapper function, the `_x`.
-> * The `cb` and `chk` were moved to the front of `_x`'s argument list, to make code more readable.
-> * The `_x` function now nicely ties to error handling in Express.js and Connect.
-> * Lean Stacks support was also updated to be even more terse, and formatting options were added to support utilities which parse stack traces based on newlines (e.g. the error template in Express.js).
-
-
 ## Evolution
 
 ### 1. Unprotected callback code
@@ -65,9 +49,11 @@ function someContext(arg, arg, callback) {
 
 Parameters for the `_x` LAEH2 wrapper function:
 
-* `callback`: in case of error return control to callback
+* `callback`: in case of error, return control to callback (if you pass `null`, the callback will be taken from the last parameter of the function in the third argument, if that parameter is a `function`
 * `true`: automatically check callback's err parameter and pass it directly to the parent callback if true
 * `function`: the asynchronously executed callback function to wrap
+
+Note: the _x and the _e functions are globals.
 
 
 ### 4. Optional Goodies
@@ -152,12 +138,6 @@ Added in LAEH2 are 2 new parameters to `.leanStacks`: `frameSeparator` and `fibe
 	./ex6.js(7 < 13)
 
 ### Notes
-
-```js
-// on Node 0.6 the following 2 lines are not really necessary, require maps these automatically:
-var _e = laeh._e; // optional
-var _x = laeh._x;
-```
 
 If you don't want a new Error object to be created each time a function wrapped by `_x()` is called (you are OK to lose the stack-trace of the async caller), use the following call:
 
