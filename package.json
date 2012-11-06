@@ -1,26 +1,26 @@
 {
-	"author": "Juraj Vitko (ypocat.com)",
-	"name": "laeh2",
-	"description": "Lightweight Asynchronous Error Handling v2",
-	"keywords": [ "error", "handling", "asynchronous" ],
-	"version": "0.3.0",
-	"homepage": "http://github.com/ypocat/laeh2",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/ypocat/laeh2.git"
-	},
-	"main": "./lib/laeh2.js",
-	"directories": {
-		"lib": "./lib"
-	},
-	"engines": {
-		"node": ">= 0.4.0"
-	},
-	"dependencies": {
-	},
-	"devDependencies": {
-	},
-	"licenses": [
-		{  "type" : "MIT", "url" : "https://raw.github.com/ypocat/laeh2/master/LICENSE" }
-	]
+    "author": "Juraj Vitko (ypocat.com)",
+    "name": "laeh2",
+    "description": "Lightweight Asynchronous Error Handling v2",
+    "keywords": [ "error", "handling", "asynchronous" ],
+    "version": "0.3.0",
+    "homepage": "http://github.com/ypocat/laeh2",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/ypocat/laeh2.git"
+    },
+    "main": "./lib/laeh2.js",
+    "directories": {
+        "lib": "./lib"
+    },
+    "engines": {
+        "node": ">= 0.4.0"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "licenses": [
+        {  "type" : "MIT", "url" : "https://raw.github.com/ypocat/laeh2/master/LICENSE" }
+    ]
 }
