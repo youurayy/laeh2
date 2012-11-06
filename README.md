@@ -1,5 +1,13 @@
 # Lightweight Asynchronous Error Handling v2 for Node.js (LAEH2)
 
+## Important Change for >= 0.3.0
+
+The `_x()` and `_e()` functions are no longer placed to the global space, and you need to explicitly declare them in your module as `var _x = laeh2._x;` and `var _e = laeh2._e;` (that is, if you need to use `_e` at all).
+
+The reason for this is that in some situations, Node/V8 had trouble to garbage-collect data created in functions wrapped by the `_x()` function, although this works perfectly fine when you reassign the `_x` function locally in your module.
+
+This change breaks existing code, but it's very easy to fix. Bug report for Node/V8 for this issue wasn't filled yet.
+
 ## Evolution
 
 ### 1. Unprotected callback code
@@ -53,8 +61,6 @@ Parameters for the `_x` LAEH2 wrapper function:
 * `true`: automatically check callback's err parameter and pass it directly to the parent callback if true
 * `function`: the asynchronously executed callback function to wrap
 
-Note: the _x and the _e functions are globals.
-
 
 ### 4. Optional Goodies
 
@@ -74,7 +80,7 @@ And then wrap your asynchronous callback with the `_x` function:
 ```js
 var fs = require('fs');
 var laeh = require('laeh2').leanStacks(true);
-var _e = laeh._e; // optional
+var _e = laeh._e;
 var _x = laeh._x;
 
 var myfunc = function(param1, paramN, cb) {
