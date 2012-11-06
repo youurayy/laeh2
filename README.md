@@ -1,12 +1,21 @@
 # Lightweight Asynchronous Error Handling v2 for Node.js (LAEH2)
 
-## Important Change for >= 0.3.0
+## Important Changes for >= 0.3.0
+
+### Change 1
 
 The `_x()` and `_e()` functions are no longer placed to the global space, and you need to explicitly declare them in your module as `var _x = laeh2._x;` and `var _e = laeh2._e;` (that is, if you need to use `_e` at all).
 
 The reason for this is that in some situations, Node/V8 had trouble to garbage-collect data created in functions wrapped by the `_x()` function, although this works perfectly fine when you reassign the `_x` function locally in your module.
 
 This change breaks existing code, but it's very easy to fix. Bug report for Node/V8 for this issue wasn't filled yet.
+
+### Change 2
+
+The `capturePrevious` flag now defaults the opposite of `process.env.NODE_ENV === 'production'`, which means that if you want to have asynchronous stack-traces captured in production, you need to use `.capturePrevious(true)` explicitly.
+
+Another change here is that when `capturePrevious` is `true`, the stack traces are no longer stored inside Error instances, but serialized during the capturing phase. This solves another mysterious garbage-collecting problem, similar to the one described above. This also adds a tiny extra overhead to the capturing phase.
+
 
 ## Evolution
 
