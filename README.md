@@ -12,9 +12,9 @@ This change breaks existing code, but it's very easy to fix. Bug report for Node
 
 ### Change 2
 
-The `capturePrevious` flag now defaults the opposite of `process.env.NODE_ENV === 'production'`, which means that if you want to have asynchronous stack-traces captured in production, you need to use `.capturePrevious(true)` explicitly.
+The `capturePrevious` flag now defaults to the opposite of `process.env.NODE_ENV === 'production'`, which means that if you want to have asynchronous stack-traces captured in production, you need to use `.capturePrevious(true)` explicitly.
 
-Another change here is that when `capturePrevious` is `true`, the stack traces are no longer stored inside Error instances, but serialized during the capturing phase. This solves another mysterious garbage-collecting problem, similar to the one described above. This also adds a tiny extra overhead to the capturing phase.
+Another change here is that when `capturePrevious` is `true`, the stack-traces are no longer stored inside Error instances, but serialized during the capturing phase. This solves another mysterious garbage-collecting problem, similar to the one described above. This also adds a tiny extra overhead to the capturing phase.
 
 
 ## Evolution
