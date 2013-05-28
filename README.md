@@ -1,5 +1,9 @@
 # Lightweight Asynchronous Error Handling v2 for Node.js (LAEH2)
 
+### News for 0.3.1
+
+`_e()` can now optionally be used as `_e('some string with %s formatting', 'nice')`.
+
 ## Important Changes for >= 0.3.0
 
 ### Change 1
@@ -106,9 +110,9 @@ myfunc('dummy', 'dummy', function(err) { // LINE #13
 ```
 
 This will print:
-	
+
 	unexpected thing < ./ex1.js(9) << ./ex1.js(7 < 13)
-	
+
 The async boundary is (by default) marked with `<<`.
 
 If we disable the "hiding" by passing `false` as the first parameter, the output will be something like:
@@ -131,7 +135,7 @@ _e('unexpected thing', { msg: 'my metadata', xyz: 123 });
 And when configured with just `.leanStacks(true)`:
 
 	unexpected thing < {"msg":"my metadata","xyz":123} ./ex3.js(9) << ./ex3.js(7 < 13)
-	
+
 This is a nice terse format which is also good when you store error messages to database or services like Loggly (with JSON input), as it saves a lot of space.
 
 For comparison, this would be printed without using `.leanStacks`:
@@ -140,7 +144,7 @@ For comparison, this would be printed without using `.leanStacks`:
 	    at /Users/ypocat/Github/laeh2/lib/laeh2.js:31:8
 	    at /Users/ypocat/Github/laeh2/example/ex4.js:9:3
 	    at Object.oncomplete (/Users/ypocat/Github/laeh2/lib/laeh2.js:56:9)
-	
+
 (Notice that the parent stack trace is missing.)
 
 The `leanStacks(hiding, prettyMeta)` call is optional, the `hiding` will hide stack frames from Node's core .js files and from `laeh2.js` itself. The `prettyMeta` is the third parameter for the `JSON.stringify` function, which is used to serialize your metadata objects (see below), and leaving it empty or null will serialize your metadata objects in-line.
@@ -163,7 +167,7 @@ var laeh = require('laeh2').capturePrevious(false);
 
 var laeh = require('laeh2').capturePrevious(false).leanStacks(true);
 ```
-	
+
 ### Warning
 
 Don't use LAEH to wrap non-asynchronous callbacks, and especially non-asynchronous loop callbacks, as this can lead to nasty runtime errors. Consider e.g.:
