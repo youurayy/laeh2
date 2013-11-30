@@ -1,9 +1,9 @@
 {
-    "author": "Juraj Vitko (@ypocat)",
+    "author": "Juraj Vitko (ypocat.com)",
     "name": "laeh2",
     "description": "Lightweight Asynchronous Error Handling v2",
     "keywords": [ "error", "handling", "asynchronous" ],
-    "version": "0.3.1",
+    "version": "0.3.3",
     "homepage": "http://github.com/ypocat/laeh2",
     "repository": {
         "type": "git",
